@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ user.username }}!</h1>
+    {% for category in categories %}
+    <div>{{category.name}}
+      <ul>
+      {% for site in category.sites %}
+      <li><a href={{site.link}}>{{site.description}}</a></li>
+      </ul>
+      {% endfor %}
+    </div>
+    {% endfor %}
+{% endblock %}
