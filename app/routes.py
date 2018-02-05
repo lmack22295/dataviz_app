@@ -1,14 +1,22 @@
 from app import app, db
 from flask import render_template, flash, redirect, url_for, request
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, GroupForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Group
 from werkzeug.urls import url_parse
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET','POST'])
+@app.route('/index', methods=['GET','POST'])
 @login_required
 def index():
+    form = GroupForm()
+    if form.validate_on_submit():
+        group = Group(name=form.name.data)
+        db.session.add(group)
+        db.session.commit()
+        flash('Your group is now live!')
+        return redirect(url_for('index'))
+    groups = Group.query.all()
     user = {'username': 'Lmack'}
     categories = [
         {
@@ -17,7 +25,7 @@ def index():
                     'link': 'https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms'}]
         }
     ]
-    return render_template('index.html', title='Home', categories=categories)
+    return render_template('index.html', title='Home', groups=groups, form=form, categories=categories)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -38,7 +46,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    logout_user
+    logout_user()
     return redirect(url_for('index'))
 
 @app.route('/register', methods=['GET', 'POST'])

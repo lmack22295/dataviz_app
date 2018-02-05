@@ -2,6 +2,17 @@
 
 {% block content %}
     <h1>Hi, {{ current_user.username }}!</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name(cols=32, rows=4) }}<br>
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% for group in groups %}
+    <div><b>{{group.name}}</b></div>
+    {% endfor %}
     {% for category in categories %}
     <div>{{category.name}}
       <ul>
