@@ -27,6 +27,15 @@ def index():
     ]
     return render_template('index.html', title='Home', groups=groups, form=form, categories=categories)
 
+@app.route('/group/<group_id>')
+def group(group_id):
+    group = Group.query.get(group_id)
+    siteList = group.sites
+    sites = []
+    for s in siteList:
+        sites.append(s)
+    return render_template('group.html', title=group.name, group=group, sites=sites)
+
 @app.route('/login', methods=['GET','POST'])
 def login():
     if current_user.is_authenticated:

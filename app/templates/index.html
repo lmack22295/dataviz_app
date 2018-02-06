@@ -11,7 +11,7 @@
         <p>{{ form.submit() }}</p>
     </form>
     {% for group in groups %}
-    <div><b>{{group.name}}</b></div>
+      <div><a href={{ url_for('group', group_id = group.id ) }}>{{group.name}}</a></div>
     {% endfor %}
     {% for category in categories %}
     <div>{{category.name}}
