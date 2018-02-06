@@ -1,17 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>This is the category for, {{ title }}!</h1>
+<div class="page-header">
+  <h2>{{ title }}</h2>
+</div>
+<div class="row">
+  <div class="col-md-4">
     {% if sites %}
-      <ul>
-      {% for site in group.sites %}
-      <li> <a href={{site.link}}>{{site.description}}</a></li>
-      {% endfor %}
-      </ul>
+    <table class="table table-striped" id="owned_stock_table">
+      <thead>
+        <tr>
+          <th>Links</th>
+          <th>Descriptions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for site in group.sites %}
+        <tr>
+          <td><a href={{site.link}}>{{site.link}}</a></td>
+          <td>{{site.description}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
     {% else %}
-    <p>No sites in this Group</p>
+    <div><b>No sites in this Group</b></div>
     {% endif %}
-   <p></p>
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
@@ -23,4 +37,6 @@
             {{ form.description(cols=32, rows=4) }}<br>
         <p>{{ form.submit() }}</p>
     </form>
+  </div>
+</div>
 {% endblock %}
