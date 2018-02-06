@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Groups Page</h1>
+  {% for group in groups %}
+    <div><a href={{ url_for('group', group_id = group.id ) }}>{{group.name}}</a></div>
+  {% endfor %}
+  <form action="" method="post">
+      {{ form.hidden_tag() }}
+      <p>
+          {{ form.name.label }}<br>
+          {{ form.name(cols=32, rows=4) }}<br>
+      </p>
+      <p>{{ form.submit() }}</p>
+  </form>
+{% endblock %}

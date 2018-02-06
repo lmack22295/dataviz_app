@@ -4,11 +4,23 @@
     <h1>This is the category for, {{ title }}!</h1>
     {% if sites %}
       <ul>
-      {% for site in {group.sites} %}
-      <li> site.name </li>
+      {% for site in group.sites %}
+      <li> <a href={{site.link}}>{{site.description}}</a></li>
       {% endfor %}
       </ul>
     {% else %}
     <p>No sites in this Group</p>
     {% endif %}
+   <p></p>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+        <div><b>Add a Site</b></div>
+        <p></p>
+            {{ form.link.label }}<br>
+            {{ form.link(cols=32, rows=4) }}<br>
+            {{ form.description.label }}<br>
+            {{ form.description(cols=32, rows=4) }}<br>
+        <p>{{ form.submit() }}</p>
+    </form>
 {% endblock %}

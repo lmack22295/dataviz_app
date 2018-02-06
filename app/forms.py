@@ -32,3 +32,10 @@ class GroupForm(FlaskForm):
     name = TextAreaField('Add a Category', validators=[
         DataRequired(), Length(max=140)])
     submit = SubmitField('Add Category')
+
+class SiteForm(FlaskForm):
+    link = TextAreaField('Link', validators=[
+        DataRequired(), Length(max=140)])
+    description = TextAreaField('Description', validators=[
+        DataRequired(), Length(max=140)])
+    submit = SubmitField('Post')
