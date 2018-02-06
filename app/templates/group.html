@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>This is the category for, {{ title }}!</h1>
+    {% if sites %}
+      <ul>
+      {% for site in {group.sites} %}
+      <li> site.name </li>
+      {% endfor %}
+      </ul>
+    {% else %}
+    <p>No sites in this Group</p>
+    {% endif %}
+{% endblock %}
